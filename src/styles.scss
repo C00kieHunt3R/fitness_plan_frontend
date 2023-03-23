@@ -1,1 +1,15 @@
 /* You can add global styles to this file, and also import other style files */
+
+.router-container {
+  height: calc(100% - 60px);
+}
+
+html, body {
+  height: 100%;
+  background-color: aliceblue;
+}
+
+html {
+  overflow-x: hidden;
+}
+
