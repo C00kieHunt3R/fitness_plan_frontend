@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import {registerLocaleData} from "@angular/common";
+import localeRu from '@angular/common/locales/ru'
 
 @Component({
   selector: 'app-root',
@@ -7,4 +9,7 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'fitness_plan_frontend';
+  constructor() {
+    registerLocaleData(localeRu)
+  }
 }

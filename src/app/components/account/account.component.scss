@@ -4,9 +4,36 @@
 
 .content-container {
   height: 100%;
+  background-color: #a7d4e8;
+  border-radius: 15px;
+  padding: 0 15px 15px 15px;
 }
-.clr-col-4 {
-  padding-top: 8%;
+.control-container {
+  padding: 10px;
+  display: flex;
+  flex-wrap: nowrap;
+}
+.date-input {
+  width: 130px;
+}
+.clr-row {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+
+.edit-btn {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+cds-icon {
+  margin-right: 10px;
 }
 
 .user-property-value {
@@ -15,7 +42,7 @@
 }
 
 .user-property-name {
-  text-align: right;
+  text-align: left;
 }
 
 .user-property-value {

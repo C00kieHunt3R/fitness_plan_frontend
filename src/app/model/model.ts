@@ -17,18 +17,20 @@ export interface ExerciseData {
   weight: number;
 }
 
-export class UserAccountData {
-  name?: string;
-  surname?: string;
+export interface UserAccountData {
+  name: string;
+  surname: string;
   age?: number
   weight?: number;
   height?: number;
-  gender?: string;
+  gender?: Gender;
   birthdate?: Date;
-  email?: string;
+  email: string;
 }
 
 export enum Gender {
-  GENDER_MALE="Мужской",
-  GENDER_FEMALE="Женский"
+  GENDER_MALE="GENDER_MALE",
+  GENDER_FEMALE="GENDER_MALE"
 }
+
+

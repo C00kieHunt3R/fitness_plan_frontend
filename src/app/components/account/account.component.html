@@ -1,6 +1,5 @@
-<div class="container">
-  <div class="clr-row">
-    <div class="clr-col-4"></div>
+<div  *ngIf="userData$ | async as userData; else loading" class="container">
+  <div class="clr-row" >
     <div class="clr-col-4">
       <div class="content-container">
         <div class="clr-row">
@@ -10,7 +9,8 @@
             </p>
           </div>
           <div class="clr-col-6">
-            <p class="user-property-value">
+            <input clrInput [(ngModel)]="userData.name" *ngIf="isEditActivated">
+            <p class="user-property-value" *ngIf="!isEditActivated">
               {{userData.name}}
             </p>
           </div>
@@ -22,7 +22,8 @@
             </p>
           </div>
           <div class="clr-col-6">
-            <p class="user-property-value">
+            <input clrInput [(ngModel)]="userData.surname" *ngIf="isEditActivated">
+            <p class="user-property-value" *ngIf="!isEditActivated">
               {{userData.surname}}
             </p>
           </div>
@@ -34,20 +35,9 @@
             </p>
           </div>
           <div class="clr-col-6">
-            <p class="user-property-value">
+            <input clrInput [(ngModel)]="userData.email" *ngIf="isEditActivated">
+            <p class="user-property-value" *ngIf="!isEditActivated">
               {{userData.email}}
-            </p>
-          </div>
-        </div>
-        <div class="clr-row">
-          <div class="clr-col-6">
-            <p class="user-property-name">
-              Пароль:
-            </p>
-          </div>
-          <div class="clr-col-6">
-            <p class="user-property-value">
-              Сменить пароль...
             </p>
           </div>
         </div>
@@ -58,7 +48,8 @@
             </p>
           </div>
           <div class="clr-col-6">
-            <p class="user-property-value">
+            <input clrInput [(ngModel)]="userData.age" *ngIf="isEditActivated">
+            <p class="user-property-value" *ngIf="!isEditActivated">
               {{userData.age}}
             </p>
           </div>
@@ -70,7 +61,8 @@
             </p>
           </div>
           <div class="clr-col-6">
-            <p class="user-property-value">
+            <input clrInput [(ngModel)]="userData.weight" *ngIf="isEditActivated">
+            <p class="user-property-value" *ngIf="!isEditActivated">
               {{userData.weight}}
             </p>
           </div>
@@ -82,7 +74,8 @@
             </p>
           </div>
           <div class="clr-col-6">
-            <p class="user-property-value">
+            <input clrInput [(ngModel)]="userData.height" *ngIf="isEditActivated">
+            <p class="user-property-value" *ngIf="!isEditActivated">
               {{userData.height}}
             </p>
           </div>
@@ -94,8 +87,9 @@
             </p>
           </div>
           <div class="clr-col-6">
-            <p class="user-property-value">
-              {{userData.gender}}
+            <input clrInput [ngModel]="getGender(userData.gender)" *ngIf="isEditActivated">
+            <p class="user-property-value" *ngIf="!isEditActivated">
+              {{getGender(userData.gender)}}
             </p>
           </div>
         </div>
@@ -106,13 +100,32 @@
             </p>
           </div>
           <div class="clr-col-6">
-            <p class="user-property-value">
+            <input clrDate type="date" class="date-input" [(ngModel)]="userData.birthdate" *ngIf="isEditActivated">
+            <p class="user-property-value" *ngIf="!isEditActivated">
               {{userData.birthdate}}
             </p>
           </div>
         </div>
+        <div class="control-container">
+          <button class="btn btn-icon btn-primary edit-btn" *ngIf="!isEditActivated" (click)="onEditClick()">
+            <cds-icon shape="pencil"></cds-icon>
+            <span class="text-center">Редактировать</span>
+          </button>
+          <button class="btn btn-icon btn-success edit-btn" *ngIf="isEditActivated" (click)="onSubmitClick()">
+            <cds-icon shape="floppy"></cds-icon>
+            <span class="text-center">Сохранить изменения</span>
+          </button>
+          <button class="btn btn-icon btn-outline edit-btn" *ngIf="isEditActivated" (click)="onCancelClick()">
+            <cds-icon shape="ban"></cds-icon>
+            <span class="text-center">Отмена</span>
+          </button>
+        </div>
       </div>
     </div>
-    <div class="clr-col-4"></div>
   </div>
 </div>
+<ng-template #loading>
+  <div style="display: flex; align-items: center; justify-content: center; height: 100%">
+    <span class="spinner"></span>
+  </div>
+</ng-template>
