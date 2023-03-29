@@ -1,109 +1,77 @@
-<div  *ngIf="userData$ | async as userData; else loading" class="container">
-  <div class="clr-row" >
+<div *ngIf="userData; else loading" class="container">
+  <div class="clr-row">
     <div class="clr-col-4">
       <div class="content-container">
         <div class="clr-row">
           <div class="clr-col-6">
-            <p class="user-property-name">
-              Имя:
-            </p>
+            <p class="user-property-name">Имя:</p>
           </div>
           <div class="clr-col-6">
             <input clrInput [(ngModel)]="userData.name" *ngIf="isEditActivated">
-            <p class="user-property-value" *ngIf="!isEditActivated">
-              {{userData.name}}
-            </p>
+            <p class="user-property-value" *ngIf="!isEditActivated">{{userData.name}}</p>
           </div>
         </div>
         <div class="clr-row">
           <div class="clr-col-6">
-            <p class="user-property-name">
-              Фамилия:
-            </p>
+            <p class="user-property-name">Фамилия:</p>
           </div>
           <div class="clr-col-6">
             <input clrInput [(ngModel)]="userData.surname" *ngIf="isEditActivated">
-            <p class="user-property-value" *ngIf="!isEditActivated">
-              {{userData.surname}}
-            </p>
+            <p class="user-property-value" *ngIf="!isEditActivated">{{userData.surname}}</p>
           </div>
         </div>
         <div class="clr-row">
           <div class="clr-col-6">
-            <p class="user-property-name">
-              Email:
-            </p>
+            <p class="user-property-name">Email:</p>
           </div>
           <div class="clr-col-6">
             <input clrInput [(ngModel)]="userData.email" *ngIf="isEditActivated">
-            <p class="user-property-value" *ngIf="!isEditActivated">
-              {{userData.email}}
-            </p>
+            <p class="user-property-value" *ngIf="!isEditActivated">{{userData.email}}</p>
           </div>
         </div>
         <div class="clr-row">
           <div class="clr-col-6">
-            <p class="user-property-name">
-              Возраст:
-            </p>
+            <p class="user-property-name">Возраст:</p>
           </div>
           <div class="clr-col-6">
             <input clrInput [(ngModel)]="userData.age" *ngIf="isEditActivated">
-            <p class="user-property-value" *ngIf="!isEditActivated">
-              {{userData.age}}
-            </p>
+            <p class="user-property-value" *ngIf="!isEditActivated">{{userData.age}}</p>
           </div>
         </div>
         <div class="clr-row">
           <div class="clr-col-6">
-            <p class="user-property-name">
-              Вес:
-            </p>
+            <p class="user-property-name">Вес:</p>
           </div>
           <div class="clr-col-6">
             <input clrInput [(ngModel)]="userData.weight" *ngIf="isEditActivated">
-            <p class="user-property-value" *ngIf="!isEditActivated">
-              {{userData.weight}}
-            </p>
+            <p class="user-property-value" *ngIf="!isEditActivated">{{userData.weight}}</p>
           </div>
         </div>
         <div class="clr-row">
           <div class="clr-col-6">
-            <p class="user-property-name">
-              Рост:
-            </p>
+            <p class="user-property-name">Рост:</p>
           </div>
           <div class="clr-col-6">
             <input clrInput [(ngModel)]="userData.height" *ngIf="isEditActivated">
-            <p class="user-property-value" *ngIf="!isEditActivated">
-              {{userData.height}}
-            </p>
+            <p class="user-property-value" *ngIf="!isEditActivated">{{userData.height}}</p>
           </div>
         </div>
         <div class="clr-row">
           <div class="clr-col-6">
-            <p class="user-property-name">
-              Пол:
-            </p>
+            <p class="user-property-name">Пол:</p>
           </div>
           <div class="clr-col-6">
-            <input clrInput [ngModel]="getGender(userData.gender)" *ngIf="isEditActivated">
-            <p class="user-property-value" *ngIf="!isEditActivated">
-              {{getGender(userData.gender)}}
-            </p>
+            <input clrInput [(ngModel)]="userData.gender" *ngIf="isEditActivated">
+            <p class="user-property-value" *ngIf="!isEditActivated">{{userData.gender}}</p>
           </div>
         </div>
         <div class="clr-row">
           <div class="clr-col-6">
-            <p class="user-property-name">
-              Дата рождения:
-            </p>
+            <p class="user-property-name">Дата рождения:</p>
           </div>
           <div class="clr-col-6">
-            <input clrDate type="date" class="date-input" [(ngModel)]="userData.birthdate" *ngIf="isEditActivated">
-            <p class="user-property-value" *ngIf="!isEditActivated">
-              {{userData.birthdate}}
-            </p>
+            <input type="date" class="date-input" pattern="yyyy-MM-dd" [(ngModel)]="userData.birthdate" *ngIf="isEditActivated">
+            <p class="user-property-value" *ngIf="!isEditActivated">{{userData.birthdate}}</p>
           </div>
         </div>
         <div class="control-container">

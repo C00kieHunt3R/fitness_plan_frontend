@@ -1,47 +1,42 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {AccountService} from "../../services/account.service";
-import {Gender, UserAccountData} from "../../model/model";
-import {Observable, Subscription} from "rxjs";
+import {Gender, GenderTypeView, UserAccountData} from "../../model/model";
+import {take} from "rxjs";
 import {IconsService} from "../../services/icons.service";
+
 
 @Component({
   selector: 'app-account',
   templateUrl: './account.component.html',
   styleUrls: ['./account.component.scss']
 })
-export class AccountComponent implements OnInit {
+export class AccountComponent implements OnInit, OnDestroy {
 
   // userData: UserAccountData;
-  userData$!: Observable<UserAccountData>;
-  userDataCopy!: Observable<UserAccountData>;
+  userData?: UserAccountData
   isEditActivated: boolean = false;
 
 
   constructor(
     private service: AccountService,
-    private iconsService: IconsService
+    private iconsService: IconsService,
   ) {
-    this.userData$ = this.service.getById(1);
-
+    this.getUserData(1);
   }
 
   ngOnInit() {
-    /*this.sub$ = this.service.getById(1).subscribe(ret => {
-      this.userData = ret;
-      // if (this.userData.gender === Gender.GENDER_MALE) {
-      //   this.userData.gender =
-      // }
-      console.log(this.userData.gender)
-      this.userData.gender == Gender.GENDER_MALE ? this.userData.gender = "Мужской" : this.userData.gender = "Женский";
-    });*/
   }
 
-  getGender(gender: Gender | undefined): string {
-    if (!gender) {
-      return 'Не определено'
-    }
-    return gender == Gender.GENDER_MALE ? "Мужской" : "Женский";
-  }
+  // getGender(gender: Gender | undefined): GenderTypeView {
+  //   // if (gender == Gender.GENDER_MALE) {
+  //   //   return {value: Gender.GENDER_MALE, viewValue: "Мужской"};
+  //   // } else if (gender == Gender.GENDER_FEMALE) {
+  //   //   return {value: Gender.GENDER_FEMALE, viewValue: "Женский"};
+  //   // }
+  //   return gender == Gender.GENDER_MALE
+  //     ? {value: Gender.GENDER_MALE, viewValue: "Мужской"}
+  //     : {value: Gender.GENDER_FEMALE, viewValue: "Женский"};
+  // }
 
   onEditClick() {
     this.isEditActivated = true;
@@ -49,10 +44,22 @@ export class AccountComponent implements OnInit {
 
   onCancelClick() {
     this.isEditActivated = false;
-    this.userData$ = this.service.getById(1);
+    this.getUserData(1);
   }
 
   onSubmitClick() {
-    this.isEditActivated = false
+    this.isEditActivated = false;
+    this.service.update(this.userData).subscribe(ret => {
+      this.userData = ret;
+    });
+  }
+
+  getUserData(id: number): void {
+    this.service.getById(1).pipe(take(1)).subscribe(value => {
+      this.userData = value;
+    })
+  }
+
+  ngOnDestroy(): void {
   }
 }

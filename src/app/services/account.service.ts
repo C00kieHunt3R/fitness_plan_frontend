@@ -3,7 +3,6 @@ import {UserAccountData} from "../model/model";
 import {Observable} from "rxjs";
 import {environment} from "../../environments/environment";
 import {Injectable} from "@angular/core";
-import {HttpService} from "./http.service";
 
 @Injectable()
 export class AccountService{
@@ -17,7 +16,7 @@ export class AccountService{
     return this.http.get<T>(this.apiUrl + "/get?id=" + id);
   }
 
-  public update<T = UserAccountData>(user: UserAccountData): Observable<T> {
-    return this.http.get<T>(this.apiUrl + "/update");
+  public update<T = UserAccountData>(user: T): Observable<T> {
+    return this.http.put<T>(this.apiUrl + "/update", user);
   }
 }

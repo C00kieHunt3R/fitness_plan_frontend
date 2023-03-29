@@ -1,14 +1,14 @@
 <div class="container">
-  <button class="btn btn-outline" (click)="isModalOpen = true">Создать цель</button>
+  <button class="btn btn-outline" (click)="isGoalCreateModalOpen = true">Создать цель</button>
   <div class="clr-row">
-    <div class="clr-col-lg-3 clr-col-3">
-      <a (click)="onCardClick()" class="card clickable">
+    <div class="clr-col-3" *ngFor="let _goal of goals">
+      <a (click)="onCardClick(_goal)" class="card clickable">
         <div class="card-img">
           <img src="assets/pics/img_3.png">
         </div>
         <div class="card-block">
           <p class="card-text">
-            Пробежать 100000000000000000 км.
+            {{_goal.name}}
           </p>
         </div>
       </a>
@@ -16,7 +16,7 @@
   </div>
 </div>
 
-<clr-modal [(clrModalOpen)]="isModalOpen" [clrModalClosable]="false">
+<clr-modal [(clrModalOpen)]="isGoalCreateModalOpen" [clrModalClosable]="true">
   <h3 class="modal-title">Новая цель</h3>
   <button aria-label="Close" class="close" type="button">
     <cds-icon shape="close"></cds-icon>
@@ -24,26 +24,55 @@
   <div class="modal-body">
     <form clrForm clrLayout="vertical">
       <clr-input-container>
-        <label class="goal-property-name">Название</label>
-        <input clrInput placeholder="Введите название цели" name="name" [(ngModel)]="name"/>
+        <label class="property-name">Название</label>
+        <input clrInput placeholder="Введите название цели" name="name" [(ngModel)]="goalData.name"/>
       </clr-input-container>
       <clr-textarea-container>
-        <label class="goal-property-name">Комментарий</label>
-        <textarea clrTextarea [(ngModel)]="text" name="text"></textarea>
+        <label class="property-name">Комментарий</label>
+        <textarea clrTextarea [(ngModel)]="goalData.comment" name="text"></textarea>
       </clr-textarea-container>
-      <clr-date-container>
-        <label class="goal-property-name">Дата начала</label>
-        <input type="date" clrDate name="goalStarted" [(ngModel)]="goalStarted" />
-      </clr-date-container>
-      <clr-date-container>
-        <label class="goal-property-name">Дата завершения</label>
-        <input type="date" clrDate name="goalCompleted" [(ngModel)]="goalCompleted" />
-      </clr-date-container>
+      <div class="field-container">
+        <label class="property-name">Дата завершения</label>
+        <input type="date" class="date-input" pattern="yyyy-MM-dd" name="goalCompleted"
+               [(ngModel)]="goalData.completed"/>
+      </div>
     </form>
   </div>
   <div class="modal-footer">
-    <button class="btn btn-outline" type="button" (click)="isModalOpen = false">Отмена</button>
+    <button class="btn btn-outline" type="button" (click)="isGoalCreateModalOpen = false">Отмена</button>
     <button class="btn btn-primary" type="button" (click)="onCreateGoalBtnClick()">Создать</button>
   </div>
 </clr-modal>
 
+<clr-modal [(clrModalOpen)]="isGoalInfoModalOpen" [clrModalClosable]="true">
+  <h3 class="modal-title">Информация о цели</h3>
+  <button aria-label="Close" class="close" type="button">
+    <cds-icon shape="close"></cds-icon>
+  </button>
+  <div class="modal-body">
+    <form clrForm clrLayout="vertical">
+      <clr-input-container>
+        <label class="property-name">Название</label>
+        <input clrInput name="goalNameInfo" [(ngModel)]="goalData.name">
+      </clr-input-container>
+      <clr-textarea-container>
+        <label class="property-name">Комментарий</label>
+        <textarea clrTextarea [(ngModel)]="goalData.comment" name="goalCommentInfo"></textarea>
+      </clr-textarea-container>
+      <div class="field-container">
+        <label class="property-name">Дата начала</label>
+        <p class="immutable-date">{{goalData.started}}</p>
+      </div>
+      <div class="field-container">
+        <label class="property-name">Дата завершения</label>
+        <input type="date" class="date-input" pattern="yyyy-MM-dd" name="goalCompletedInfo"
+               [(ngModel)]="goalData.completed"/>
+      </div>
+    </form>
+  </div>
+  <div class="modal-footer">
+    <button class="btn btn-outline" type="button" (click)="isGoalInfoModalOpen = false">Закрыть</button>
+    <button class="btn btn-danger" type="button" (click)="onDeleteButtonClick()">Удалить</button>
+    <button class="btn btn-primary" type="button" (click)="onSaveChangesBtnClick()">Сохранить изменения</button>
+  </div>
+</clr-modal>
