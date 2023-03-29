@@ -49,18 +49,18 @@
       <button class="btn btn-primary" *ngIf="isWorkoutEditModeActivated" (click)="onAddExerciseBtnClick()">Добавить упражнение</button>
     </div>
     <div class="clr-row exercises-slider">
-      <div class="clr-col-2" *ngFor="let exercise of workoutExercises">
+      <div class="clr-col-2" *ngFor="let ex of workoutExercises">
         <div class="card clickable">
-          <div class="card-img" (click)="onCardClick(exercise)">
+          <div class="card-img" (click)="onCardClick(ex)">
             <img src="assets/pics/img_1.png">
           </div>
           <div class="card-block">
-            <p class="card-text" (click)="onCardClick(exercise)">
-              {{exercise.name}}
+            <p class="card-text" (click)="onCardClick(ex)">
+              {{ex.name}}
             </p>
           </div>
           <div class="card-footer" *ngIf="isWorkoutEditModeActivated">
-            <button class="btn btn-sm btn-danger-outline" (click)="onDeleteExerciseBtnClick(exercise)">Удалить</button>
+            <button class="btn btn-sm btn-danger-outline" (click)="onDeleteExerciseBtnClick(ex)">Удалить</button>
             <button class="btn btn-sm btn-outline">Редактировать</button>
           </div>
         </div>

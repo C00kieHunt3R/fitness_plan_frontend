@@ -11,7 +11,7 @@ import {environment} from "../../../../environments/environment";
   templateUrl: './workout-info.component.html',
   styleUrls: ['./workout-info.component.scss']
 })
-export class WorkoutInfoComponent implements OnInit, OnDestroy{
+export class WorkoutInfoComponent implements OnInit, OnDestroy {
   private routeSub?: Subscription;
   private id?: number;
   workoutData?: WorkoutData;
@@ -23,6 +23,7 @@ export class WorkoutInfoComponent implements OnInit, OnDestroy{
   isExerciseInfoModalOpen: boolean = false;
   isExerciseAddModalOpen: boolean = false;
   isWorkoutEditModeActivated: boolean = false;
+
   constructor(
     private route: ActivatedRoute,
     private router: Router,
@@ -54,6 +55,7 @@ export class WorkoutInfoComponent implements OnInit, OnDestroy{
       }
     })
   }
+
   ngOnDestroy(): void {
     this.routeSub?.unsubscribe();
   }
@@ -81,15 +83,14 @@ export class WorkoutInfoComponent implements OnInit, OnDestroy{
     })
   }
 
-  onDeleteExerciseBtnClick(exercise: ExerciseData) {
-    this.exerciseService.delete(exercise.id).subscribe(value => {
+  onDeleteExerciseBtnClick(ex: ExerciseData) {
+    this.exerciseService.delete(ex.id).subscribe(value => {
       if (value) {
-        if (value) {
-          this.exercises?.forEach((ex, index) => {
-            if (ex.id === exercise.id)
-              this.exercises?.splice(index, 1);
-          })
-        }
+        this.workoutExercises?.forEach((exData, index) => {
+          if (exData.id === ex.id) {
+            this.workoutExercises?.splice(index, 1);
+          }
+        })
       }
     })
   }
