@@ -1,0 +1,150 @@
+.fitness-plan-image {
+  width: 15rem;
+  height: 15rem;
+  object-fit: cover;
+}
+
+.no-avatar-icon {
+  width: 15rem;
+  height: 15rem;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.avatar-col {
+  max-width: 18rem;
+  border-right: 1px solid #719ECE;
+}
+
+.entity-info-row {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding-bottom: 15pt;
+}
+
+.entity-info-header {
+  margin: 0;
+  padding: 0;
+}
+
+
+.entity-info-label {
+  font-size: 20pt;
+  color: black;
+  padding-right: 15pt;
+  display: flex;
+  align-items: end;
+}
+
+.entity-info-textarea,
+.entity-info-input {
+  font-size: 16pt;
+}
+
+.entity-info-textarea {
+  background: white;
+  border-color: #d3d9de;
+  border-width: 1px;
+  resize: none;
+  overflow: auto;
+}
+
+.entity-info-textarea:focus {
+  outline: none !important;
+  box-shadow: 0 0 10px #719ECE;
+}
+
+.training-days-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  background: rgb(142,181,62);
+  background: linear-gradient(90deg, rgba(142,181,62,1) 0%, rgba(0,143,203,1) 73%);
+  margin: 10pt;
+  border-radius: 15px;
+}
+
+.card {
+  width: 16em;
+  margin: 10pt 0 10pt 0;
+}
+.training-days-row {
+  display: flex;
+  flex-direction: column;
+  h1 {
+    padding-left: 10pt;
+  }
+}
+
+.card-block {
+  font-size: 16pt;
+}
+
+.image-control-container {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: space-between;
+}
+
+.clr-col-4 {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  h1 {
+    padding-bottom: 15pt;
+  }
+}
+
+.btn-danger-outline {
+  margin-right: 0 !important;
+}
+
+.training-day {
+
+}
+.card-img {
+  display: flex;
+  justify-content: center;
+}
+.no-day-avatar-icon {
+  width: 10rem;
+  height: 10rem;
+}
+
+.image-container {
+  display: flex;
+  justify-content: center;
+}
+
+
+.image-item {
+  width: 150pt;
+  height: 150pt;
+  object-fit: cover;
+  margin: 2pt;
+}
+
+.image-item:hover {
+  transition-property: box-shadow, transform;
+  transition-duration: .3s;
+  box-shadow: 0 0 10px #719ECE;
+  transform: scale(1.01);
+}
+
+.clr-col-2 {
+}
+
+.image-list {
+  max-height: 300pt;
+  overflow-x: hidden;
+  overflow-y: auto;
+  margin-left: 30pt;
+
+}
+

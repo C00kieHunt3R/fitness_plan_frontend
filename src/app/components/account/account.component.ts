@@ -1,8 +1,8 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {AccountService} from "../../services/account.service";
-import {Gender, GenderTypeView, UserAccountData} from "../../model/model";
+import {UserAccountData} from "../../model/model";
 import {take} from "rxjs";
-import {IconsService} from "../../services/icons.service";
+import {IconService} from "../../services/icon.service";
 
 
 @Component({
@@ -19,7 +19,7 @@ export class AccountComponent implements OnInit, OnDestroy {
 
   constructor(
     private service: AccountService,
-    private iconsService: IconsService,
+    private iconsService: IconService,
   ) {
     this.getUserData(1);
   }

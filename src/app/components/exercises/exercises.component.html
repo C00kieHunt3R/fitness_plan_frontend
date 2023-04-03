@@ -1,3 +1,78 @@
 <div class="container">
-
+  <button class="btn btn-outline" (click)="onCreateExerciseBtnClick()">Создать упражнение</button>
+  <div class="clr-row">
+    <div class="clr-col-3" *ngFor="let _exercise of exercises">
+      <a (click)="onCardClick(_exercise)" class="card clickable">
+        <div class="card-img">
+          <img src="assets/pics/img_3.png">
+        </div>
+        <div class="card-block">
+          <p class="card-text">
+            {{_exercise.name}}
+          </p>
+        </div>
+      </a>
+    </div>
+  </div>
 </div>
+<clr-modal [(clrModalOpen)]="isExerciseCreateModalOpen" [clrModalClosable]="true">
+  <h3 class="modal-title">Создать упражнение</h3>
+  <button aria-label="Close" class="close" type="button">
+    <cds-icon shape="close"></cds-icon>
+  </button>
+  <div class="modal-body">
+    <form clrForm clrLayout="vertical">
+      <clr-input-container>
+        <label>Имя упражнения</label>
+        <input clrInput [(ngModel)]="exercise.name" name="exerciseName">
+      </clr-input-container>
+      <clr-input-container>
+        <label>Количество подходов</label>
+        <input clrInput [(ngModel)]="exercise.sets" name="exerciseSets">
+      </clr-input-container>
+      <clr-input-container>
+        <label>Количество повторений</label>
+        <input clrInput [(ngModel)]="exercise.reps" name="exerciseReps">
+      </clr-input-container>
+      <clr-input-container>
+        <label>Используемый вес</label>
+        <input clrInput [(ngModel)]="exercise.weight" name="exerciseWeight">
+      </clr-input-container>
+    </form>
+  </div>
+  <div class="modal-footer">
+    <button class="btn btn-outline" type="button" (click)="isExerciseCreateModalOpen = false">Отмена</button>
+    <button class="btn btn-primary" type="button" (click)="onExerciseCreateModalBtnClick()">Создать</button>
+  </div>
+</clr-modal>
+<clr-modal [(clrModalOpen)]="isExerciseInfoModalOpen" [clrModalClosable]="true">
+  <h3 class="modal-title">Информация об упражнении</h3>
+  <button aria-label="Close" class="close" type="button">
+    <cds-icon shape="close"></cds-icon>
+  </button>
+  <div class="modal-body">
+    <form clrForm clrLayout="vertical">
+      <div>
+        <label>Имя упражнения</label>
+        <p>{{exercise.name}}</p>
+      </div>
+      <div>
+        <label>Количество подходов</label>
+        <p>{{exercise.sets}}</p>
+      </div>
+      <div>
+        <label>Количество повторений</label>
+        <p>{{exercise.reps}}</p>
+      </div>
+      <div>
+        <label>Используемый вес</label>
+        <p>{{exercise.weight}}</p>
+      </div>
+    </form>
+  </div>
+  <div class="modal-footer">
+    <button class="btn btn-outline" type="button" (click)="isExerciseInfoModalOpen = false">Отмена</button>
+    <button class="btn btn-danger" type="button" (click)="onExerciseDeleteModalBtnClick()">Удалить</button>
+    <button class="btn btn-primary" type="button" (click)="onExerciseCreateModalBtnClick()">Сохранить изменения</button>
+  </div>
+</clr-modal>

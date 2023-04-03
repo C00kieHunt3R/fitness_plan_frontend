@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import '@cds/core/icon/register.js'
-import {IconsService} from "../../services/icons.service";
+import {IconService} from "../../services/icon.service";
 
 @Component({
   selector: 'app-header',
@@ -10,7 +10,7 @@ import {IconsService} from "../../services/icons.service";
 export class HeaderComponent  {
 
   constructor(
-    iconsService: IconsService
+    iconsService: IconService
   ) {
   }
 

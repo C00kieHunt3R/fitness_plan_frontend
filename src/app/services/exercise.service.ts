@@ -27,4 +27,8 @@ export class ExerciseService {
   public delete<T = boolean>(id: number): Observable<T> {
     return this.http.delete<T>(this.apiUrl + "/delete?id=" + id);
   }
+
+  public create<T = ExerciseData>(exercise: ExerciseData): Observable<T> {
+    return this.http.post<T>(this.apiUrl + "/create", exercise);
+  }
 }

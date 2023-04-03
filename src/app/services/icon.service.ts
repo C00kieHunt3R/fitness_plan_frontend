@@ -1,10 +1,19 @@
 import {Injectable, OnInit} from "@angular/core";
-import {banIcon, boltIcon, ClarityIcons, floppyIcon, pencilIcon, pencilIconName, userIcon} from "@cds/core/icon";
+import {
+  banIcon,
+  boltIcon,
+  ClarityIcons,
+  floppyIcon, imageIcon,
+  listIcon,
+  pencilIcon,
+  pencilIconName,
+  userIcon
+} from "@cds/core/icon";
 
 @Injectable()
-export class IconsService {
+export class IconService {
   constructor() {
-    ClarityIcons.addIcons(boltIcon, userIcon, pencilIcon, floppyIcon, banIcon);
+    ClarityIcons.addIcons(boltIcon, userIcon, pencilIcon, floppyIcon, banIcon, listIcon, imageIcon);
     ClarityIcons.addIcons(['nutrition', '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21,4a3,3,0,0,0-3-3H6a2.992,2.992,0,0,0-.827,5.87L5,7a5.026,5.026,0,0,0-2,4v9a3,3,0,0,0,3,3H18a3,3,0,0,0,3-3V11a5.026,5.026,0,0,0-2-4h0l-.173-.13A3,3,0,0,0,21,4ZM19,20a1,1,0,0,1-1,1H6a1,1,0,0,1-1-1V18H19Zm0-8v4H5V12ZM5.194,10a2.994,2.994,0,0,1,1-1.4L8.333,7h7.334L17.8,8.6A2.989,2.989,0,0,1,18.806,10ZM18,5H6A1,1,0,0,1,6,3H18a1,1,0,0,1,0,2Z"/></svg>'])
     ClarityIcons.addIcons(['exercise', '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M22,11H21V8a3,3,0,0,0-6,0v3H9V8A3,3,0,0,0,3,8v3H2a1,1,0,0,0,0,2H3v3a3,3,0,0,0,6,0V13h6v3a3,3,0,0,0,6,0V13h1a1,1,0,0,0,0-2ZM7,16a1,1,0,0,1-2,0V8A1,1,0,0,1,7,8Zm12,0a1,1,0,0,1-2,0V8a1,1,0,0,1,2,0Z"/></svg>']);
     ClarityIcons.addIcons(['run', '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21.481,14.068l-2.2-6.585a1,1,0,0,0-.949-.683,4.865,4.865,0,0,1-2.893-.907A7.623,7.623,0,0,1,13.976,2.78a1,1,0,0,0-1.683-.487l-6,6a1,1,0,0,0,.016,1.43l12.537,12a1,1,0,0,0,1.4-.016L21.9,20.049a3.75,3.75,0,0,0,0-5.3A1.751,1.751,0,0,1,21.481,14.068Zm-.992,4.567-.967.967L8.43,8.984,12.544,4.87A7.358,7.358,0,0,0,14.03,7.307,6.076,6.076,0,0,0,17.6,8.757L19.583,14.7a3.778,3.778,0,0,0,.906,1.464A1.75,1.75,0,0,1,20.489,18.635ZM1,17a1,1,0,0,1,1-1h8a1,1,0,0,1,0,2H2A1,1,0,0,1,1,17Zm0-4a1,1,0,0,1,1-1H6a1,1,0,0,1,0,2H2A1,1,0,0,1,1,13Zm0,8a1,1,0,0,1,1-1H14a1,1,0,0,1,0,2H2A1,1,0,0,1,1,21Z"/></svg>']);

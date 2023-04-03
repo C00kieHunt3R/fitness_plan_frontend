@@ -2,7 +2,7 @@
   <button class="btn btn-outline" (click)="isCreateWorkoutModalOpen = true">Создать тренировку</button>
   <div class="clr-row">
     <div class="clr-col-3" *ngFor="let workout of workouts">
-      <a [routerLink]="'/workout/' + workout.id" class="card clickable">
+      <a [routerLink]="'/workout/info/' + workout.id" class="card clickable">
         <div class="card-img">
           <img src="assets/pics/img_1.png">
         </div>
