@@ -1,12 +1,20 @@
 import {Injectable} from "@angular/core";
 import {HttpClient} from "@angular/common/http";
 import {WorkoutData} from "../model/model";
-import {Observable} from "rxjs";
+import {BehaviorSubject, Observable} from "rxjs";
 import {environment} from "../../environments/environment";
 
 @Injectable()
 export class WorkoutService {
   private apiUrl: string = environment.apiBaseUrl + "/api/workout";
+  private workoutSubject: BehaviorSubject<WorkoutData> = new BehaviorSubject<WorkoutData>({} as WorkoutData);
+  private workout: Observable<WorkoutData> = this.workoutSubject.asObservable();
+  public get getWorkout(): Observable<WorkoutData> {
+    return this.workout;
+  }
+  public set workoutData(_workout: WorkoutData) {
+    this.workoutSubject.next(_workout);
+  }
   constructor(
     private http: HttpClient
   ) {

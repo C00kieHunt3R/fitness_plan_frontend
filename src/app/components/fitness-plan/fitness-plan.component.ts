@@ -1,6 +1,7 @@
 import {Component} from '@angular/core';
 import {DayOfTheWeek, DayOfTheWeekView, FitnessPlanData} from "../../model/model";
 import {FitnessPlanService} from "../../services/fitness-plan.service";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-sport-plan',
@@ -25,7 +26,8 @@ export class FitnessPlanComponent {
   ]
 
   constructor(
-    private service: FitnessPlanService
+    private service: FitnessPlanService,
+    private router: Router
   ) {
     this.fitnessPlan = {} as FitnessPlanData;
     this.service.getAll().subscribe(value => {
@@ -33,4 +35,13 @@ export class FitnessPlanComponent {
     })
   }
 
+  onCardClick(_fitnessPlan: FitnessPlanData): void {
+    this.service.fitnessPlanData = _fitnessPlan;
+    this.router.navigate(['/fitness-plan/info']);
+  }
+
+  onFitnessPlanCreateBtnClick(): void {
+    this.service.fitnessPlanData = {} as FitnessPlanData;
+    this.router.navigate(['/fitness-plan/info'])
+  }
 }

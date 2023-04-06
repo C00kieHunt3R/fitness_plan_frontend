@@ -1,5 +1,150 @@
-
 .container {
   height: 100%;
   padding: 10px;
+}
+
+.image-container {
+  display: flex;
+  justify-content: center;
+}
+
+.entity-avatar {
+  width: 15rem;
+  height: 15rem;
+  border-radius: 3%;
+  object-fit: cover;
+}
+
+.no-avatar-icon {
+  width: 15rem;
+  height: 15rem;
+}
+
+.avatar-col {
+  max-width: 18rem;
+  border-right: 1px solid #719ECE;
+}
+
+.entity-avatar-controls {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: space-between;
+}
+
+.entity-info-header {
+  margin: 0;
+  padding: 0;
+}
+
+.entity-info-row {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding-bottom: 15pt;
+}
+
+.entity-info-label {
+  font-size: 20pt;
+  color: black;
+  padding-right: 15pt;
+  display: flex;
+  align-items: end;
+}
+
+.entity-info-textarea,
+.entity-info-input {
+  font-size: 16pt;
+}
+
+.entity-info-textarea {
+  background: white;
+  border-color: #d3d9de;
+  border-width: 1px;
+  resize: none;
+  overflow: auto;
+}
+
+.entity-info-textarea:focus {
+  outline: none !important;
+  box-shadow: 0 0 10px #719ECE;
+}
+
+.content-col {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  h1 {
+    padding-bottom: 15pt;
+  }
+}
+
+.image-item {
+  width: 150pt;
+  height: 150pt;
+  object-fit: cover;
+  margin: 2pt;
+}
+
+.image-item:hover {
+  transition-property: box-shadow, transform;
+  transition-duration: .3s;
+  box-shadow: 0 0 10px #719ECE;
+  transform: scale(1.01);
+}
+
+
+.image-list {
+  max-height: 300pt;
+  overflow-x: hidden;
+  overflow-y: auto;
+  margin-left: 30pt;
+
+}
+.list-item-avatar {
+  width: 15rem;
+  height: 15rem;
+  object-fit: cover;
+}
+
+.entity-info-data {
+  font-size: 15pt;
+  margin: 10pt 0;
+  color: black;
+}
+
+.card-columns-4 {
+  margin-left: 10pt;
+}
+
+.list-col {
+  max-width: max-content;
+}
+
+clr-modal {
+  height: min-content;
+}
+.sub-list {
+  background: rgb(142,181,62);
+  background: linear-gradient(90deg, rgba(142,181,62,1) 0%, rgba(0,143,203,1) 73%);
+  border-radius: 20px;
+  margin: 2pt
+}
+clr-modal .modal-body {
+  height: min-content;
+  overflow: hidden;
+}
+.image-list-container {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  max-height: 100pt;
+  overflow-x: auto;
+  width: max-content;
+  padding: 0 20pt;
+  img {
+    width: 65pt;
+    height: 65pt;
+    object-fit: cover;
+  }
 }

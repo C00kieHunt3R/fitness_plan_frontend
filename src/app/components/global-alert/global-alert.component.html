@@ -1,0 +1,15 @@
+<div class="alert-container">
+  <clr-alert (clrAlertClosedChange)="onClose($event)"
+             *ngIf="alertService.shouldShowAlert"
+             [clrAlertAppLevel]="alertService.alertConfig.clrAlertAppLevel"
+             [clrAlertClosable]="alertService.alertConfig.clrAlertClosable"
+             [clrAlertType]="alertService.alertConfig.clrAlertType"
+  >
+    <clr-alert-item>
+		<span class="alert-text">
+      {{alertService.alertConfig.message}}
+    </span>
+    </clr-alert-item>
+  </clr-alert>
+</div>
+

@@ -1,17 +1,17 @@
 <div class="container" *ngIf="fitnessPlanList; else loading">
-  <button class="btn btn-outline" routerLink="/fitness/create">Создать план</button>
+  <button class="btn btn-outline" (click)="onFitnessPlanCreateBtnClick()">Создать план</button>
   <div class="clr-row">
-    <div class="clr-col-3" *ngFor="let _fitnessPlan of fitnessPlanList">
-      <a [routerLink]="'/workout/' + _fitnessPlan.id" class="card clickable">
+    <div class="card-columns-4" *ngFor="let _fitnessPlan of fitnessPlanList">
+      <div class="card clickable" (click)="onCardClick(_fitnessPlan)">
         <div class="card-img">
-          <img src="assets/pics/img_1.png">
+          <img src="assets/pics/img_1.png" class="list-item-avatar">
         </div>
         <div class="card-block">
           <p class="card-text">
             {{_fitnessPlan.name}}
           </p>
         </div>
-      </a>
+      </div>
     </div>
   </div>
 </div>
@@ -20,28 +20,3 @@
     <span class="spinner"></span>
   </div>
 </ng-template>
-
-<!--<clr-modal [(clrModalOpen)]="isFitnessPlanCreateModalOpen" [clrModalClosable]="true">-->
-<!--  <h3 class="modal-title">Новый фитнес-план</h3>-->
-<!--  <button aria-label="Close" class="close" type="button">-->
-<!--    <cds-icon shape="close"></cds-icon>-->
-<!--  </button>-->
-<!--  <div class="modal-body">-->
-<!--    <form clrForm clrLayout="vertical">-->
-<!--      <clr-input-container>-->
-<!--        <label class="property-name">Название</label>-->
-<!--        <input clrInput class="name-input" name="name" [(ngModel)]="fitnessPlan.name"/>-->
-<!--      </clr-input-container>-->
-<!--      <clr-input-container>-->
-<!--        <label class="property-name">Комментарий</label>-->
-<!--        <input clrInput [(ngModel)]="fitnessPlan.comment" name="comment">-->
-<!--      </clr-input-container>-->
-<!--      <clr-select-container>-->
-<!--        <label class="property-name">Тренировочные дни</label>-->
-<!--        <select clrSelect>-->
-<!--          <option *ngFor="let day of weekDays" [value]="day.value">{{day.viewValue}}</option>-->
-<!--        </select>-->
-<!--      </clr-select-container>-->
-<!--    </form>-->
-<!--  </div>-->
-<!--</clr-modal>-->

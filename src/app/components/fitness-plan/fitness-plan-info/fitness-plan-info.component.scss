@@ -1,0 +1,38 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.no-day-avatar-icon {
+  width: 10rem;
+  height: 10rem;
+}
+
+.card {
+  margin: 1rem 0 1rem 0;
+}
+
+.sub-list {
+  display: flex;
+  flex-direction: row;
+}
+
+.sub-list-item-avatar {
+  width: 10rem;
+  height: 10rem;
+  object-fit: cover;
+}
+.card-block {
+  font-size: 16pt;
+}
+.clr-control-label {
+  margin-left: 5pt;
+}
+clr-checkbox-container {
+  margin-top: 5pt;
+  height: 70pt;
+  overflow: auto;
+}
+
+

@@ -1,10 +1,13 @@
 <div class="container">
-  <button class="btn btn-outline" (click)="onCreateExerciseBtnClick()">Создать упражнение</button>
+  <button class="btn btn-outline" (click)="onExerciseCreateBtnClick()">Создать упражнение</button>
   <div class="clr-row">
-    <div class="clr-col-3" *ngFor="let _exercise of exercises">
+    <div class="card-columns-4" *ngFor="let _exercise of exercises">
       <a (click)="onCardClick(_exercise)" class="card clickable">
         <div class="card-img">
-          <img src="assets/pics/img_3.png">
+          <img [src]="getImage(_exercise.image)" class="list-item-avatar" *ngIf="_exercise.image; else icon">
+          <ng-template #icon>
+            <cds-icon shape="image" class="no-avatar-icon"></cds-icon>
+          </ng-template>
         </div>
         <div class="card-block">
           <p class="card-text">

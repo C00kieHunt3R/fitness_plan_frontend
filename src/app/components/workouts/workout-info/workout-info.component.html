@@ -1,68 +1,66 @@
 <div class="container" *ngIf="workoutData; else loading">
   <div class="clr-row">
-    <div class="clr-col-2 workout-info">
-      <img [src]="image" alt="Изображение тренировки" class="workout-logo">
+    <div class="clr-col-4 avatar-col content-col">
+      <div class="image-container">
+        <img class="entity-avatar" [src]="getImage(workoutData.image)" alt="main-entity-avatar"
+             *ngIf="workoutData.image; else noImage">
+        <ng-template #noImage>
+          <cds-icon shape="image" class="no-avatar-icon"></cds-icon>
+        </ng-template>
+      </div>
+      <div class="entity-avatar-controls">
+        <button class="btn btn-success-outline" style="width: 100%; margin-right: 0;"
+                (click)="onNewAvatarLoadBtnClick()">Загрузить фотографию
+        </button>
+      </div>
     </div>
-    <div class="clr-col-6 workout-info">
-      <div *ngIf="isWorkoutEditModeActivated; else basicView">
-        <div class="field-container">
-          <label class="workout-property-name">Название</label>
-          <input clrInput name="goalNameInfo" [(ngModel)]="workoutData.name">
+    <div class="clr-col-4 content-col" *ngIf="isWorkoutEditModeActivated; else info">
+      <h1 class="entity-info-header">Тренировка</h1>
+      <div class="entity-info-row">
+        <label class="entity-info-label">Имя:</label>
+        <input clrInput class="entity-info-input" [(ngModel)]="workoutData.name">
+      </div>
+      <div class="entity-info-row">
+        <label class="entity-info-label">Комментарий:</label>
+        <textarea clrTextarea class="entity-info-textarea" [(ngModel)]="workoutData.comment"></textarea>
+      </div>
+      <div class="entity-control-container">
+        <button class="btn btn-outline" (click)="onWorkoutCancelBtnClick()">Отмена</button>
+        <button class="btn btn-success" (click)="onExerciseAddBtnClick()">Добавить упражнения</button>
+        <button class="btn btn-primary" (click)="onWorkoutCreateBtnClick()">Сохранить</button>
+      </div>
+    </div>
+    <ng-template #info>
+      <div class="clr-col-4 content-col">
+        <h1 class="entity-info-header">Тренировка</h1>
+        <div class="entity-info-row">
+          <label class="entity-info-label">Имя:</label>
+          <p class="entity-info-data">{{workoutData.name}}</p>
         </div>
-        <div class="field-container">
-          <label class="workout-property-name">Комментарий</label>
-          <textarea clrTextarea [(ngModel)]="workoutData.comment" name="goalCommentInfo"></textarea>
+        <div class="entity-info-row">
+          <label class="entity-info-label">Комментарий:</label>
+          <p class="entity-info-data">{{workoutData.comment}}</p>
         </div>
-        <div class="field-container">
-          <label class="workout-property-name">Дата тренировки</label>
-          <input type="date" class="date-input" pattern="yyyy-MM-dd" name="goalCompletedInfo"
-                 [(ngModel)]="workoutData.date"/>
-        </div>
-        <div>
-          <button class="btn btn-outline" (click)="isWorkoutEditModeActivated = false">Отмена</button>
-          <button class="btn btn-primary">Сохранить изменения</button>
+        <div class="entity-control-container">
+          <button class="btn btn-danger" (click)="onWorkoutDeleteBtnClick()">Удалить</button>
+          <button class="btn btn-primary" (click)="onWorkoutEditBtnClick()">Редактировать</button>
         </div>
       </div>
-      <ng-template #basicView>
-        <div class="field-container">
-          <label class="workout-property-name">Название</label>
-          <div>{{workoutData.name}}</div>
-        </div>
-        <div class="field-container">
-          <label class="workout-property-name">Комментарий</label>
-          <p>{{workoutData.comment}}</p>
-        </div>
-        <div class="field-container">
-          <label class="workout-property-name">Дата тренировки</label>
-          <p>{{workoutData.date}}</p>
-        </div>
-        <div>
-          <button class="btn btn-danger" (click)="onDeleteWorkoutBtnClick()">Удалить</button>
-          <button class="btn btn-primary" (click)="isWorkoutEditModeActivated = true">Редактировать</button>
-        </div>
-      </ng-template>
-    </div>
+    </ng-template>
   </div>
-
-  <div>
-    <div class="exercises-control-container">
-      <button class="btn btn-primary" *ngIf="isWorkoutEditModeActivated" (click)="onAddExerciseBtnClick()">Добавить упражнение</button>
-    </div>
-    <div class="clr-row exercises-slider">
-      <div class="clr-col-2" *ngFor="let ex of workoutExercises">
-        <div class="card clickable">
-          <div class="card-img" (click)="onCardClick(ex)">
-            <img src="assets/pics/img_1.png">
-          </div>
-          <div class="card-block">
-            <p class="card-text" (click)="onCardClick(ex)">
-              {{ex.name}}
-            </p>
-          </div>
-          <div class="card-footer" *ngIf="isWorkoutEditModeActivated">
-            <button class="btn btn-sm btn-danger-outline" (click)="onDeleteExerciseBtnClick(ex)">Удалить</button>
-            <button class="btn btn-sm btn-outline">Редактировать</button>
-          </div>
+  <div class="clr-row sub-list">
+    <div class="clr-col-2 list-col" *ngFor="let ex of workoutExercises">
+      <div class="card clickable">
+        <div class="card-img" (click)="onCardClick(ex)">
+          <img src="assets/pics/img_1.png" class="sub-list-item-avatar">
+        </div>
+        <div class="card-block">
+          <p class="card-text">
+            {{ex.name}}
+          </p>
+        </div>
+        <div class="card-footer" *ngIf="isWorkoutEditModeActivated">
+          <button class="btn btn-sm btn-danger-outline" (click)="onExerciseDeleteBtnClick(ex)">Удалить</button>
         </div>
       </div>
     </div>
@@ -100,25 +98,24 @@
 </clr-modal>
 
 <clr-modal [(clrModalOpen)]="isExerciseAddModalOpen" [clrModalClosable]="true">
-  <h3 class="modal-title">Добавить упражнение</h3>
+  <h3 class="modal-title">Добавить упражнения</h3>
   <button aria-label="Close" class="close" type="button">
     <cds-icon shape="close"></cds-icon>
   </button>
   <div class="modal-body">
-    <div class="clr-control-container">
-      <div class="clr-select-wrapper">
-        <select class="clr-select">
-          <ng-container *ngFor="let ex of exercises">
-            <option [value]="ex.name">{{ex.name}}</option>
-          </ng-container>
-
-        </select>
-      </div>
+    <div class="checkbox-container">
+      <label>Выберите упражнения</label>
+      <clr-checkbox-container>
+        <clr-checkbox-wrapper *ngFor="let ex of formExercises">
+          <input type="checkbox" clrCheckbox [(ngModel)]="ex.selected"/>
+          <label>{{ex.value.name}}</label>
+        </clr-checkbox-wrapper>
+      </clr-checkbox-container>
     </div>
   </div>
   <div class="modal-footer">
     <button class="btn btn-outline" type="button" (click)="isExerciseAddModalOpen = false">Отмена</button>
-    <button class="btn btn-primary" type="button" (click)="isExerciseAddModalOpen = false">Добавить</button>
+    <button class="btn btn-primary" type="button" (click)="onExerciseAddModalBtnClick()">Добавить</button>
   </div>
 </clr-modal>
 <ng-template #loading>
@@ -126,3 +123,23 @@
     <span class="spinner"></span>
   </div>
 </ng-template>
+<clr-modal [(clrModalOpen)]="isNewAvatarLoadModalOpen" [clrModalClosable]="true">
+  <h3 class="modal-title">Новая фотография</h3>
+  <button aria-label="Close" class="close" type="button">
+    <cds-icon shape="close"></cds-icon>
+  </button>
+  <div class="modal-body">
+    <div class="image-list">
+      <div class="clr-row">
+        <div *ngFor="let image of imageNames">
+          <div class="clr-col-2">
+            <img [src]="getImage(image)" class="image-item" (click)="onImageSelectModalClick(image)">
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button class="btn btn-outline" type="button" (click)="isNewAvatarLoadModalOpen = false;">Отмена</button>
+  </div>
+</clr-modal>

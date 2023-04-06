@@ -1,6 +1,9 @@
 import { Component } from '@angular/core';
 import {ExerciseData} from "../../model/model";
 import {ExerciseService} from "../../services/exercise.service";
+import {Router} from "@angular/router";
+import {environment} from "../../../environments/environment";
+import {IconService} from "../../services/icon.service";
 
 @Component({
   selector: 'app-exercises',
@@ -17,6 +20,8 @@ export class ExercisesComponent {
 
   constructor(
     private service: ExerciseService,
+    private router: Router,
+    private iconService: IconService
   ) {
     this.exercise = {} as ExerciseData;
     this.service.getAll().subscribe(value => {
@@ -25,13 +30,13 @@ export class ExercisesComponent {
   }
 
   onCardClick(_exercise: ExerciseData): void {
-    this.exercise = _exercise;
-    this.isExerciseInfoModalOpen = true;
+    this.service.exerciseData = _exercise;
+    this.router.navigate(['/exercise/info']);
   }
 
-  onCreateExerciseBtnClick(): void {
-    this.isExerciseCreateModalOpen = true;
-    this.exercise = {} as ExerciseData;
+  onExerciseCreateBtnClick(): void {
+    this.service.exerciseData = {} as ExerciseData;
+    this.router.navigate(['/exercise/info'])
   }
 
   onExerciseCreateModalBtnClick(): void {
@@ -52,5 +57,8 @@ export class ExercisesComponent {
       }
     });
     this.isExerciseInfoModalOpen = false;
+  }
+  public getImage(image: string): string {
+    return environment.apiImagesUrl + "/" + image;
   }
 }

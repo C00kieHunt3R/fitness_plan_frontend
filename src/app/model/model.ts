@@ -6,16 +6,10 @@ export interface WorkoutData {
   date: string;
   exercisesId: number[];
 }
-export interface GoalData {
-  id: number;
-  name: string;
-  comment: string;
-  started: Date;
-  completed: Date;
-}
 export interface ExerciseData {
   id: number;
   name: string;
+  image: string;
   reps: number;
   sets: number;
   weight: number;
@@ -32,43 +26,40 @@ export interface UserAccountData {
   email: string;
 }
 
-export interface NutritionData {
-  id: number;
-  name: string;
-  type: string;
-  protein: number;
-  carbohydrates: number;
-  fat: number;
-}
 
 export interface FitnessPlanData {
   id: number;
   name: string;
   comment: string;
   image: string;
-  trainingDays: TrainingDayData[];
+  trainingDays: number[];
 }
 
 export interface TrainingDayData {
   id: number;
   name: DayOfTheWeek;
+  comment: string;
   image: string;
-  workoutsId: number[];
-  nutritionId: number[];
+  workoutId: number;
 }
 
 export enum DayOfTheWeek {
-  MONDAY,
-  TUESDAY,
-  WEDNESDAY,
-  THURSDAY,
-  FRIDAY,
-  SATURDAY,
-  SUNDAY
+  MONDAY = "Понедельник",
+  TUESDAY = "Вторник",
+  WEDNESDAY = "Среда",
+  THURSDAY = "Четверг",
+  FRIDAY = "Пятница",
+  SATURDAY = "Суббота",
+  SUNDAY = "Воскресенье",
 }
 
 export interface DayOfTheWeekView {
   value: DayOfTheWeek;
   viewValue: string;
+}
+
+export interface EntityCheckboxView {
+  value: any;
+  selected: boolean;
 }
 

@@ -1,0 +1,91 @@
+<div class="container" *ngIf="exercise; else loading">
+  <div class="clr-row">
+    <div class="clr-col-4 avatar-col content-col">
+      <div class="image-container">
+        <img class="entity-avatar" [src]="getImage(exercise.image)" alt="fitness-plan avatar"
+             *ngIf="exercise.image; else noImage">
+        <ng-template #noImage>
+          <cds-icon shape="image" class="no-avatar-icon"></cds-icon>
+        </ng-template>
+      </div>
+      <div class="entity-avatar-controls">
+        <button class="btn btn-success-outline" style="width: 100%; margin-right: 0;"
+                *ngIf="isExerciseEditModeActivated"
+                (click)="isNewAvatarLoadModalOpen = true;"
+        >
+          Загрузить фотографию
+        </button>
+      </div>
+    </div>
+    <div class="clr-col-4 content-col" *ngIf="isExerciseEditModeActivated; else info">
+      <h1 class="entity-info-header">Упражнение</h1>
+      <div class="entity-info-row">
+        <label class="entity-info-label">Имя:</label>
+        <input clrInput class="entity-info-input" [(ngModel)]="exercise.name">
+      </div>
+      <div class="entity-info-row">
+        <label class="entity-info-label">Число повторений:</label>
+        <input clrInput class="entity-info-input" [(ngModel)]="exercise.reps">
+      </div>
+      <div class="entity-info-row">
+        <label class="entity-info-label">Число подходов:</label>
+        <input clrInput class="entity-info-input" [(ngModel)]="exercise.sets">
+      </div>
+      <div class="entity-info-row">
+        <label class="entity-info-label">Используемый вес:</label>
+        <input clrInput class="entity-info-input" [(ngModel)]="exercise.weight">
+      </div>
+      <div class="entity-control-container">
+        <button class="btn btn-outline" (click)="onExerciseCancelBtnClick()">Отмена</button>
+        <button class="btn btn-primary" (click)="onExerciseCreateBtnClick()">Сохранить</button>
+      </div>
+    </div>
+    <ng-template #info>
+      <div class="clr-col-4 content-col">
+        <h1 class="entity-info-header">Упражнение</h1>
+        <div class="entity-info-row"><label class="entity-info-label">Имя:</label>
+          <div class="entity-info-data">{{exercise.name}}</div>
+        </div>
+        <div class="entity-info-row"><label class="entity-info-label">Число повторений:</label>
+          <div class="entity-info-data">{{exercise.reps}}</div>
+        </div>
+        <div class="entity-info-row"><label class="entity-info-label">Число подходов:</label>
+          <div class="entity-info-data">{{exercise.sets}}</div>
+        </div>
+        <div class="entity-info-row"><label class="entity-info-label">Используемый вес:</label>
+          <div class="entity-info-data">{{exercise.weight}}</div>
+        </div>
+        <div class="entity-control-container">
+          <button class="btn btn-danger" (click)="onExerciseDeleteBtnClick()">Удалить</button>
+          <button class="btn btn-primary" (click)="onExerciseEditBtnClick()">Редактировать</button>
+        </div>
+      </div>
+    </ng-template>
+  </div>
+</div>
+<ng-template #loading>
+  <div style="display: flex; align-items: center; justify-content: center; height: 100%">
+    <span class="spinner"></span>
+  </div>
+</ng-template>
+
+<clr-modal [(clrModalOpen)]="isNewAvatarLoadModalOpen" [clrModalClosable]="true">
+  <h3 class="modal-title">Новая фотография</h3>
+  <button aria-label="Close" class="close" type="button">
+    <cds-icon shape="close"></cds-icon>
+  </button>
+  <div class="modal-body">
+    <div class="image-list">
+      <div class="clr-row">
+        <div *ngFor="let image of imageNames">
+          <div class="clr-col-2">
+            <img [src]="getImage(image)" class="image-item" (click)="onImageSelectModalClick(image)">
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button class="btn btn-outline" type="button" (click)="isNewAvatarLoadModalOpen = false;">Отмена</button>
+  </div>
+</clr-modal>

@@ -1,17 +1,17 @@
 <div class="container" *ngIf="workouts; else loading">
-  <button class="btn btn-outline" (click)="isCreateWorkoutModalOpen = true">Создать тренировку</button>
+  <button class="btn btn-outline" (click)="onWorkoutCreateBtnClick()">Создать тренировку</button>
   <div class="clr-row">
-    <div class="clr-col-3" *ngFor="let workout of workouts">
-      <a [routerLink]="'/workout/info/' + workout.id" class="card clickable">
+    <div class="card-columns-4" *ngFor="let workout of workouts">
+      <div (click)="onCardClick(workout)" class="card clickable">
         <div class="card-img">
-          <img src="assets/pics/img_1.png">
+          <img [src]="getImage(workout.image)" class="list-item-avatar">
         </div>
         <div class="card-block">
           <p class="card-text">
             {{workout.name}}
           </p>
         </div>
-      </a>
+      </div>
     </div>
   </div>
 </div>
@@ -20,75 +20,4 @@
     <span class="spinner"></span>
   </div>
 </ng-template>
-<clr-modal [(clrModalOpen)]="isCreateWorkoutModalOpen" [clrModalClosable]="true">
-  <h3 class="modal-title">Новая тренировка</h3>
-  <button aria-label="Close" class="close" type="button">
-    <cds-icon shape="close"></cds-icon>
-  </button>
-  <div class="modal-body">
-    <form clrForm clrLayout="vertical">
-      <clr-input-container>
-        <label class="property-name">Название</label>
-        <input clrInput class="name-input" placeholder="Введите название тренировки" name="name" [(ngModel)]="workoutData.name"/>
-      </clr-input-container>
-      <clr-textarea-container>
-        <label class="property-name">Комментарий</label>
-        <textarea clrTextarea [(ngModel)]="workoutData.comment" name="text"></textarea>
-      </clr-textarea-container>
-      <div class="field-container">
-        <label class="property-name">Дата тренировки</label>
-        <input type="date" class="date-input" pattern="yyyy-MM-dd" name="goalCompleted"
-               [(ngModel)]="workoutData.date"/>
-      </div>
-    </form>
-  </div>
-  <div class="modal-footer">
-    <button class="btn btn-outline" type="button" (click)="isCreateWorkoutModalOpen = false">Отмена</button>
-    <button class="btn btn-primary" type="button" (click)="onCreateWorkoutBtnClick()">Создать</button>
-  </div>
-</clr-modal>
 
-<clr-modal [(clrModalOpen)]="isWorkoutInfoModalOpen" [clrModalClosable]="true">
-  <h3 class="modal-title">Информация о тренировке</h3>
-  <button aria-label="Close" class="close" type="button">
-    <cds-icon shape="close"></cds-icon>
-  </button>
-  <div class="modal-body">
-    <form clrForm clrLayout="vertical">
-      <clr-input-container>
-        <label class="property-name">Название</label>
-        <input clrInput name="goalNameInfo" [(ngModel)]="workoutData.name">
-      </clr-input-container>
-      <clr-textarea-container>
-        <label class="property-name">Комментарий</label>
-        <textarea clrTextarea [(ngModel)]="workoutData.comment" name="goalCommentInfo"></textarea>
-      </clr-textarea-container>
-      <div class="field-container">
-        <label class="property-name">Дата тренировки</label>
-        <input type="date" class="date-input" pattern="yyyy-MM-dd" name="goalCompletedInfo"
-               [(ngModel)]="workoutData.date"/>
-      </div>
-      <div>
-        <ul class="list exercises-list">
-          <li class="list-item" *ngFor="let id of workoutData.exercisesId">
-            <a class="exercises-list-link" routerLink="workout/ + {{id}}">{{id}}</a>
-          </li>
-<!--          <li class="list-item">-->
-<!--            <a class="exercises-list-link">Упражнение</a>-->
-<!--          </li>-->
-<!--          <li class="list-item">-->
-<!--            <a class="exercises-list-link">Упражнение</a>-->
-<!--          </li>-->
-<!--          <li class="list-item">-->
-<!--            <a class="exercises-list-link">Упражнение</a>-->
-<!--          </li>-->
-        </ul>
-      </div>
-    </form>
-  </div>
-  <div class="modal-footer">
-    <button class="btn btn-outline" type="button" (click)="isWorkoutInfoModalOpen = false">Закрыть</button>
-    <button class="btn btn-danger" type="button" (click)="onDeleteButtonClick()">Удалить</button>
-    <button class="btn btn-primary" type="button" (click)="onSaveChangesBtnClick()">Сохранить изменения</button>
-  </div>
-</clr-modal>

@@ -1,7 +1,153 @@
-<div class="container">
+<div class="container" *ngIf="fitnessPlanData; else loading">
+  <div class="clr-row">
+    <div class="clr-col-4 avatar-col content-col">
+      <div class="image-container">
+        <img class="entity-avatar" [src]="getImage(fitnessPlanData.image)" alt="fitness-plan avatar"
+             *ngIf="fitnessPlanData.image; else noImage">
+        <ng-template #noImage>
+          <cds-icon shape="image" class="no-avatar-icon"></cds-icon>
+        </ng-template>
+      </div>
+      <div class="entity-avatar-controls">
+        <button class="btn btn-success-outline" style="width: 100%; margin-right: 0;"
+                *ngIf="isFitnessPlanEditModeActivated"
+                (click)="isNewAvatarLoadModalOpen = true;">Загрузить фотографию
+        </button>
+      </div>
+    </div>
+    <div class="clr-col-4 content-col" *ngIf="isFitnessPlanEditModeActivated; else info">
+      <h1 class="entity-info-header">Фитнес-план</h1>
+      <div class="entity-info-row">
+        <label class="entity-info-label">Имя:</label>
+        <input clrInput class="entity-info-input" [(ngModel)]="fitnessPlanData.name">
+      </div>
+      <div class="entity-info-row">
+        <label class="entity-info-label">Комментарий:</label>
+        <textarea clrTextarea class="entity-info-textarea" [(ngModel)]="fitnessPlanData.comment"></textarea>
+      </div>
+      <div class="entity-control-container">
+        <button class="btn btn-outline" (click)="onFitnessPlanCancelBtnClick()">Отмена</button>
+        <button class="btn btn-success" (click)="onTrainingDayAddBtnClick()">Добавить день тренировки</button>
+        <button class="btn btn-primary" (click)="onFitnessPlanCreateBtnClick()">Сохранить</button>
+      </div>
+    </div>
+    <ng-template #info>
+      <div class="clr-col-4 content-col">
+        <h1 class="entity-info-header">Фитнес-план</h1>
+        <div class="entity-info-row">
+          <label class="entity-info-label">Имя:</label>
+          <p class="entity-info-data">{{fitnessPlanData.name}}</p>
+        </div>
+        <div class="entity-info-row">
+          <label class="entity-info-label">Комментарий:</label>
+          <p class="entity-info-data">{{fitnessPlanData.comment}}</p>
+        </div>
+        <div class="entity-control-container">
+          <button class="btn btn-danger" (click)="onFitnessPlanDeleteBtnClick()">Удалить</button>
+          <button class="btn btn-primary" (click)="onFitnessPlanEditBtnClick()">Редактировать</button>
+        </div>
+      </div>
+    </ng-template>
+  </div>
+  <div class="clr-row sub-list">
+    <div class="clr-col-2 list-col" *ngFor="let day of trainingDays">
+      <div class="card clickable training-day" (click)="onCardClick(day)">
+        <div class="card-header">
+          <h3 class="entity-info-header">{{day.name}}</h3>
+        </div>
+        <div class="card-img">
+          <img *ngIf="day.image; else icon" [src]="getImage(day.image)" class="sub-list-item-avatar">
+          <ng-template #icon>
+            <cds-icon shape="image" class="no-day-avatar-icon"></cds-icon>
+          </ng-template>
+        </div>
+        <div class="card-block">
+          <p class="card-text">{{day.comment}}</p>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
 <ng-template #loading>
   <div style="display: flex; align-items: center; justify-content: center; height: 100%">
     <span class="spinner"></span>
   </div>
 </ng-template>
+<clr-modal [(clrModalOpen)]="isNewAvatarLoadModalOpen" [clrModalClosable]="true">
+  <h3 class="modal-title">Новая фотография</h3>
+  <button aria-label="Close" class="close" type="button">
+    <cds-icon shape="close"></cds-icon>
+  </button>
+  <div class="modal-body">
+    <div class="image-list">
+      <div class="clr-row">
+        <div *ngFor="let image of imageNames">
+          <div class="clr-col-2">
+            <img [src]="getImage(image)" class="image-item" (click)="onImageSelectModalClick(image)">
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button class="btn btn-outline" type="button" (click)="isNewAvatarLoadModalOpen = false;">Отмена</button>
+  </div>
+</clr-modal>
+<clr-modal [(clrModalOpen)]="isTrainingDayPropertiesModalOpen" [clrModalClosable]="true">
+  <h3 class="modal-title">Тренировочный день</h3>
+  <button aria-label="Close" class="close" type="button">
+    <cds-icon shape="close"></cds-icon>
+  </button>
+  <div class="modal-body" style="display: flex; flex-direction: column;"
+       *ngIf="isFitnessPlanEditModeActivated; else basicView">
+    <label>Выберите день недели</label>
+    <div class="clr-control-container">
+      <div class="clr-select-wrapper">
+        <select class="clr-select" [(ngModel)]="selectedWeekDay">
+          <option *ngFor="let day of weekDays" [value]="day.value">{{day.viewValue}}</option>
+        </select>
+      </div>
+    </div>
+    <label>Выберите тренировку</label>
+    <div class="clr-control-container">
+      <div class="clr-select-wrapper">
+        <select class="clr-select" [(ngModel)]="selectedWorkout" (ngModelChange)="selectWorkout($event)">
+          <option *ngFor="let workout of workouts" [ngValue]="workout">{{workout.name}}</option>
+        </select>
+      </div>
+    </div>
+    <label>Введите описание</label>
+    <input style="border-width: 0 0 1px 0; width: 80pt" [(ngModel)]="selectedTrainingDayComment">
+    <label>Выберите картинку тренировочного дня</label>
+    <div class="image-list-container">
+      <div class="clr-row">
+        <div *ngFor="let image of imageNames">
+          <img [src]="getImage(image)" class="image-item" (click)="onImageSelectTrainingDayModalClick(image)">
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="modal-footer" *ngIf="isFitnessPlanEditModeActivated">
+    <button class="btn btn-outline" type="button" (click)="isTrainingDayPropertiesModalOpen = false">Отмена</button>
+    <button class="btn btn-danger" type="button" *ngIf="selectedTrainingDay.id"
+            (click)="onTrainingDayDeleteModalBtnClick()">Удалить
+    </button>
+    <button class="btn btn-primary" type="button" (click)="onTrainingDayCreateBtnClick()">Сохранить</button>
+  </div>
+  <ng-template #basicView>
+    <div class="modal-body" style="display: flex; flex-direction: column;">
+      <label>День недели</label>
+      <p>{{selectedTrainingDay.name}}</p>
+      <label>Тренировка</label>
+      <p>{{selectedWorkout.name}}</p>
+      <label>Описание</label>
+      <p>{{selectedTrainingDayComment}}</p>
+    </div>
+    <div class="modal-footer" *ngIf="!isFitnessPlanEditModeActivated">
+      <button class="btn btn-outline" type="button" (click)="isTrainingDayPropertiesModalOpen = false">Отмена</button>
+      <button class="btn btn-primary" type="button" *ngIf="selectedTrainingDay.id" (click)="redirectToWorkout()">
+        Перейти к тренировке
+      </button>
+    </div>
+  </ng-template>
+</clr-modal>

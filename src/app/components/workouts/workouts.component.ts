@@ -1,13 +1,17 @@
 import { Component } from '@angular/core';
 import {WorkoutData} from "../../model/model";
 import {WorkoutService} from "../../services/workout.service";
+import {Router} from "@angular/router";
+import {ImageService} from "../../services/image.service";
+import {environment} from "../../../environments/environment";
 
 @Component({
   selector: 'app-workouts',
   templateUrl: './workouts.component.html',
-  styleUrls: ['./workouts.component.scss']
+  styleUrls: ['./workouts.component.scss', '../../style/primary.styles.scss']
 })
 export class WorkoutsComponent {
+  imagesApiUrl: string = environment.apiBaseUrl + "/api/images/get";
   isCreateWorkoutModalOpen: boolean = false;
   isWorkoutInfoModalOpen: boolean = false;
 
@@ -15,7 +19,9 @@ export class WorkoutsComponent {
   workouts?: WorkoutData[];
 
   constructor(
-    private service: WorkoutService
+    private service: WorkoutService,
+    private router: Router,
+    private imageService: ImageService
   ) {
     this.workoutData = {} as WorkoutData;
     this.service.getAll().subscribe(value => {
@@ -25,8 +31,16 @@ export class WorkoutsComponent {
 
   onCardClick(workout: WorkoutData) {
     this.workoutData = workout;
-    this.isWorkoutInfoModalOpen = true;
+    // this.isWorkoutInfoModalOpen = true;
+    this.service.workoutData = workout;
+    this.router.navigate(['workout/info'], )
   }
+
+  onWorkoutCreateBtnClick() {
+    this.service.workoutData = {} as WorkoutData;
+    this.router.navigate(['workout/info'])
+  }
+
 
   onCreateWorkoutBtnClick() {
     this.isCreateWorkoutModalOpen = false;
@@ -52,5 +66,10 @@ export class WorkoutsComponent {
       this.workouts = this.workouts?.map(workout => workout.id !== updatedWorkout.id ? workout : updatedWorkout);
     });
     this.isWorkoutInfoModalOpen = false;
+  }
+
+
+  getImage(image: string): string {
+    return this.imagesApiUrl + "/" + image;
   }
 }

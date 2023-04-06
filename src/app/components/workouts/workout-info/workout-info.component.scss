@@ -46,12 +46,7 @@
   width: 210px;
 }
 
-.exercises-slider {
-  background: rgb(142,181,62);
-  background: linear-gradient(90deg, rgba(142,181,62,1) 0%, rgba(0,143,203,1) 73%);
-  margin: 0.5em;
-  border-radius: 20px;
-}
+
 
 .card {
   margin: 1rem 0 1rem 0;
@@ -61,13 +56,28 @@
   padding-left: 0.5em;
 }
 
-clr-modal .modal-body {
-  height: min-content;
-  overflow: hidden;
-}
+
 
 .modal-footer {
   display: flex;
   flex-wrap: nowrap;
   flex-direction: row;
 }
+
+.entity-avatar {
+  width: 15rem;
+  height: 15rem;
+  object-fit: cover;
+}
+
+clr-checkbox-container {
+  margin-top: 5pt;
+  height: 70pt;
+  overflow: auto;
+}
+
+.clr-control-label {
+  margin-left: 5pt;
+}
+
+
